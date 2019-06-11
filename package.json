@@ -1,0 +1,31 @@
+{
+  "name": "rollup-plugin-url-resolve",
+  "description": "Use URLs in your Rollup imports",
+  "author": "Michael Jackson <michael@jackson.us>",
+  "repository": "mjackson/rollup-plugin-url-resolve",
+  "version": "0.1.0",
+  "main": "index.js",
+  "module": "esm/rollup-plugin-url-resolve.js",
+  "files": [
+    "esm",
+    "index.js"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "prepublishOnly": "yarn build",
+    "watch": "rollup -c -w"
+  },
+  "dependencies": {
+    "@babel/core": "^7.4.5",
+    "data-uri-to-buffer": "^2.0.1",
+    "make-fetch-happen": "^4.0.1",
+    "mime-types": "^2.1.24"
+  },
+  "devDependencies": {
+    "rollup": "^1.14.6",
+    "rollup-plugin-commonjs": "^10.0.0",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^5.0.1"
+  },
+  "license": "MIT"
+}
