@@ -3,10 +3,11 @@
   "description": "Use URLs in your Rollup imports",
   "author": "Michael Jackson <michael@jackson.us>",
   "repository": "mjackson/rollup-plugin-url-resolve",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "index.js",
   "module": "esm/rollup-plugin-url-resolve.js",
   "files": [
+    "cjs",
     "esm",
     "index.js"
   ],
@@ -22,6 +23,7 @@
     "mime-types": "^2.1.24"
   },
   "devDependencies": {
+    "jest": "^24.8.0",
     "rollup": "^1.14.6",
     "rollup-plugin-commonjs": "^10.0.0",
     "rollup-plugin-json": "^4.0.0",
