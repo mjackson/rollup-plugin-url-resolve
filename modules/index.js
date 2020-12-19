@@ -62,51 +62,68 @@ async function loadURL(url, fetchOpts) {
   }
 }
 
-function isBearSpecifier(specifier) {
-  if (path.extname(specifier) !== '') {
-    return false
-  }
+function splitPackageAndFile(specifier) {
+  const segments = specifier.split('/');
 
+  // Example: '@foo/strip-ansi/index.js' or '@foo/strip-ansi'
   if (specifier.startsWith('@')) {
-    return specifier.split('/').length === 2
+    return [segments.splice(0, 2).join('/'), segments.splice(2).join('/')];
   }
 
-  return specifier.split('/').length === 1
+  // Example: 'strip-ansi/index.js'
+  if (segments.length > 2) {
+    return [segments[0], segments.splice(1).join('/')];
+  }
+
+  // Example: 'strip-ansi' or 'foo.js'
+  return specifier.indexOf('.') === -1 ? [specifier, ''] : ['', specifier];
 }
 
+// Input example: "/@foo/string-length@4.0.1/index.js" or "/string-length@4.0.1/index.js"
 function packageName(absolutePath) {
-  const segments = absolutePath.split('/')
+  const segments = absolutePath.split('/');
+
   if (absolutePath.startsWith('/@')) {
-    return path.join(segments[1], segments[2])
+    // Output example "@foo/string-length@4.0.1"
+    return path.join(segments[1], segments[2]);
   }
 
-  return segments[1]
+  // Output example "string-length@4.0.1"
+  return segments[1];
 }
 
 export default function urlResolve(fetchOpts) {
   return {
     async resolveId(source, importer) {
+      // Example: https://unpkg.com/strip-ansi@6.0.0/index.js
       const url = parseURL(source);
       if (url) {
-        return resolveURL(url)
+        return resolveURL(url);
       }
 
+      // Example: https://unpkg.com/string-length@4.0.1/index.js
       const importerUrl = parseURL(importer);
       if (!importerUrl) {
-        return null
+        return null;
       }
 
-      if (isBearSpecifier(source)) {
-        const importerPackage = packageName(importerUrl.pathname)
-        importerUrl.pathname = path.join(importerPackage, 'package.json')
-        const packageJson = JSON.parse(await loadURL(importerUrl, fetchOpts))
-        const version = packageJson.dependencies[source]
-        importerUrl.pathname = `${source}@${version}`
-        return importerUrl.toString()
+      const importerPackage = packageName(importerUrl.pathname);
+      importerUrl.pathname = path.join(importerPackage, 'package.json');
+      const importerPackageJson = JSON.parse(
+        await loadURL(importerUrl, fetchOpts)
+      );
+
+      const [sourcePackage, sourceFile] = splitPackageAndFile(source);
+      if (sourcePackage === '') {
+        return null;
       }
 
-      importerUrl.pathname = source
-      return importerUrl.toString()
+      const version = importerPackageJson.dependencies[sourcePackage];
+      importerUrl.pathname = path.join(
+        `${sourcePackage}@${version}`,
+        sourceFile
+      );
+      return importerUrl.toString();
     },
     load(id) {
       const url = parseURL(id);
