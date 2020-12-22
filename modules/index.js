@@ -84,11 +84,11 @@ function packageName(absolutePath) {
   const segments = absolutePath.split('/');
 
   if (absolutePath.startsWith('/@')) {
-    // Output example "@foo/string-length@4.0.1"
+    // Output example: "@foo/string-length@4.0.1"
     return path.join(segments[1], segments[2]);
   }
 
-  // Output example "string-length@4.0.1"
+  // Output example: "string-length@4.0.1"
   return segments[1];
 }
 
