@@ -16,7 +16,7 @@ function parseURL(source) {
 }
 
 function isValidURL(url) {
-  return url && ['data:', 'file:', 'http:', 'https:'].includes(url.protocol);
+  return url && (['data:', 'file:', 'http:', 'https:'].indexOf(url.protocol) >= 0);
 }
 
 async function loadURL(url, fetchOpts) {
