@@ -23,10 +23,10 @@
     "mime-types": "^2.1.24"
   },
   "devDependencies": {
-    "rollup": "^2.50.6",
-    "rollup-plugin-commonjs": "^10.0.0",
-    "rollup-plugin-json": "^4.0.0",
-    "rollup-plugin-node-resolve": "^5.0.1"
+    "@rollup/plugin-commonjs": "^19.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "rollup": "^2.50.6"
   },
   "license": "MIT"
 }
