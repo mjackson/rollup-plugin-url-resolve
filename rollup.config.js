@@ -28,6 +28,7 @@ const cjs = {
   input: './modules/index.js',
   external: isBareModuleId,
   output: {
+    exports: 'default',
     file: `cjs/${pkg.name}.js`,
     format: 'cjs'
   },

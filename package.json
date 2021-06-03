@@ -18,13 +18,13 @@
   },
   "dependencies": {
     "@babel/core": "^7.4.5",
-    "data-uri-to-buffer": "^2.0.1",
-    "make-fetch-happen": "^4.0.1",
+    "data-uri-to-buffer": "^3.0.1",
+    "make-fetch-happen": "^9.0.2",
     "mime-types": "^2.1.24"
   },
   "devDependencies": {
     "jest": "^24.8.0",
-    "rollup": "^1.14.6",
+    "rollup": "^2.50.6",
     "rollup-plugin-commonjs": "^10.0.0",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.0.1"
