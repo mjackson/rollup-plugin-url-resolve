@@ -23,7 +23,6 @@
     "mime-types": "^2.1.24"
   },
   "devDependencies": {
-    "jest": "^24.8.0",
     "rollup": "^2.50.6",
     "rollup-plugin-commonjs": "^10.0.0",
     "rollup-plugin-json": "^4.0.0",
